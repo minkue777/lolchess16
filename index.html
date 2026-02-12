@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TFT 시즌 16 퀴즈</title>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 .highlight{color:#d4a843;font-weight:700}
@@ -46,16 +47,13 @@
 <div class="divider my-0"></div>
 <div class="flex gap-2">
 <button class="btn btn-success btn-outline flex-1 h-12 text-base gap-2" id="btnCorrect">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-5"/></svg>
-정답
+<i class="fa-solid fa-circle-check text-lg"></i> 정답
 </button>
 <button class="btn btn-error btn-outline flex-1 h-12 text-base gap-2" id="btnWrong">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-오답
+<i class="fa-solid fa-circle-xmark text-lg"></i> 오답
 </button>
 <a class="btn btn-warning flex-1 h-12 text-base no-underline gap-2" id="btnShow" href="#" target="_blank">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/><path d="M14 2h6v6"/><path d="M22 2 12 12"/></svg>
-정답 확인
+<i class="fa-solid fa-book-open text-lg"></i> 정답 확인
 </a>
 </div>
 </div>
