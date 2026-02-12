@@ -1,130 +1,92 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="dim">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TFT 시즌 16 퀴즈</title>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#080810;color:#c8c8d4;font-family:'Inter','Segoe UI',sans-serif;min-height:100vh;display:flex;justify-content:center;padding:16px}
-.app{max-width:560px;width:100%}
-
-/* 헤더 */
-.header{text-align:center;padding:28px 0 20px;position:relative}
-.header h1{font-size:1.3rem;font-weight:700;color:#e8e8f0;letter-spacing:-.02em}
-.header h1 em{font-style:normal;color:#c89b3c}
-.header .sub{font-size:.75rem;color:#4a4a60;margin-top:4px;letter-spacing:.05em;text-transform:uppercase}
-
-/* 스탯 바 */
-.stats{display:flex;justify-content:center;gap:6px;margin-bottom:16px}
-.stats span{font-size:.75rem;color:#6a6a80;padding:4px 12px;background:#10101c;border:1px solid #1a1a2e;border-radius:20px}
-.stats b{color:#c89b3c;font-weight:600}
-
-/* SRS 정보 */
-.srs-info{text-align:center;font-size:.7rem;color:#3a3a50;margin-bottom:14px}
-.srs-info .box-tag{display:inline-block;padding:2px 8px;border-radius:10px;margin-right:4px;font-size:.65rem;font-weight:600;letter-spacing:.02em}
-
-/* 퀴즈 카드 */
-.quiz-box{background:linear-gradient(145deg,#11111e 0%,#0d0d18 100%);border:1px solid #1e1e32;border-radius:16px;padding:28px 24px;margin-bottom:14px;box-shadow:0 4px 24px rgba(0,0,0,.4)}
-.q-type{font-size:.65rem;font-weight:600;color:#c89b3c;margin-bottom:14px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
-.q-text{font-size:1.05rem;color:#e8e8f0;line-height:1.7;font-weight:400}
-.q-text .highlight{color:#c89b3c;font-weight:700}
-
-/* 구분선 */
-.divider{border:none;border-top:1px solid #1a1a2e;margin:24px 0 20px}
-
-/* 버튼 영역 */
-.btn-row{display:flex;gap:8px}
-.btn{padding:12px 0;border:none;border-radius:10px;font-size:.85rem;cursor:pointer;font-weight:600;transition:all .15s ease;letter-spacing:-.01em}
-.btn-next,.btn-skip{width:52px;flex-shrink:0;font-size:1.2rem}
-.btn-answer{flex:1}
-.btn:active{transform:scale(.97)}
-.btn-next{background:rgba(60,180,100,.12);color:#5ec97a;border:1px solid rgba(60,180,100,.2)}
-.btn-next:hover{background:rgba(60,180,100,.2);border-color:rgba(60,180,100,.35)}
-.btn-skip{background:rgba(255,80,80,.08);color:#e06060;border:1px solid rgba(255,80,80,.15)}
-.btn-skip:hover{background:rgba(255,80,80,.15);border-color:rgba(255,80,80,.3)}
-.btn-answer{background:rgba(200,155,60,.1);color:#c89b3c;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;border:1px solid rgba(200,155,60,.2)}
-.btn-answer:hover{background:rgba(200,155,60,.2);border-color:rgba(200,155,60,.4)}
-
-/* 코스트 뱃지 */
-.cost-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:700;margin-left:6px;vertical-align:middle}
-.cost-1{background:#6b6b6b;color:#fff}
-.cost-2{background:#0fa67e;color:#fff}
-.cost-3{background:#1d6fb5;color:#fff}
-.cost-4{background:#b035cc;color:#fff}
-.cost-5{background:#e5a020;color:#0a0a1a}
-.cost-7{background:#e03030;color:#fff}
-
-/* 설정 패널 */
-.settings{background:#0c0c16;border:1px solid #1a1a2e;border-radius:14px;padding:18px;margin-top:8px}
-.settings h2{font-size:.75rem;font-weight:600;color:#4a4a60;margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase}
-.chk-group{display:flex;flex-wrap:wrap;gap:6px}
-.chk-group label{display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:8px;cursor:pointer;font-size:.78rem;font-weight:500;color:#5a5a70;border:1px solid #1a1a2e;transition:all .15s;user-select:none}
-.chk-group label:hover{border-color:#2a2a45;color:#8a8aa0}
-.chk-group input{display:none}
-.chk-group input:checked+span{color:#c89b3c}
-.chk-group label:has(input:checked){border-color:rgba(200,155,60,.3);background:rgba(200,155,60,.05)}
-.settings-row{margin-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.btn-sm{padding:5px 14px;border:none;border-radius:6px;font-size:.72rem;font-weight:500;cursor:pointer;background:#14141f;color:#5a5a70;border:1px solid #1a1a2e;transition:all .15s}
-.btn-sm:hover{border-color:#2a2a45;color:#aaa}
-
-/* SRS 박스 컬러 */
-.box-0{background:rgba(255,60,60,.15);color:#ff6060}
-.box-1{background:rgba(255,140,40,.15);color:#ff9030}
-.box-2{background:rgba(220,180,30,.15);color:#ccb020}
-.box-3{background:rgba(100,180,40,.15);color:#70b830}
-.box-4{background:rgba(40,180,110,.15);color:#30b870}
-.box-5{background:rgba(40,140,220,.15);color:#3090e0}
-
-/* 반응형 */
-@media(max-width:480px){
-  .app{padding:0 2px}
-  .quiz-box{padding:22px 18px;border-radius:14px}
-  .q-text{font-size:.95rem}
-  .btn{padding:11px 0;font-size:.8rem}
-  .stats span{padding:3px 10px;font-size:.7rem}
-}
+.highlight{color:#d4a843;font-weight:700}
+.cost-badge{font-size:.65rem;font-weight:700;padding:1px 7px;border-radius:4px;margin-left:5px;vertical-align:middle;display:inline-block}
+.cost-1{background:#6b6b6b;color:#fff}.cost-2{background:#0fa67e;color:#fff}.cost-3{background:#1d6fb5;color:#fff}
+.cost-4{background:#b035cc;color:#fff}.cost-5{background:#d4a843;color:#000}.cost-7{background:#e03030;color:#fff}
+.box-0{background:oklch(.25 .08 25);color:oklch(.75 .15 25)}
+.box-1{background:oklch(.28 .08 60);color:oklch(.78 .14 60)}
+.box-2{background:oklch(.28 .07 90);color:oklch(.78 .12 90)}
+.box-3{background:oklch(.26 .07 145);color:oklch(.76 .14 145)}
+.box-4{background:oklch(.26 .06 170);color:oklch(.76 .12 170)}
+.box-5{background:oklch(.26 .06 230);color:oklch(.76 .1 230)}
 </style>
 </head>
-<body>
-<div class="app">
-<div class="header">
-<h1><em>TFT</em> 시즌 16 퀴즈</h1>
-<p class="sub">신화와 전설 &mdash; 인출 연습</p>
+<body class="min-h-screen bg-base-300 flex justify-center px-4 py-6">
+<div class="w-full max-w-lg space-y-4">
+
+<!-- 헤더 -->
+<div class="text-center pb-2">
+<h1 class="text-xl font-bold tracking-tight"><span class="text-warning">TFT</span> 시즌 16 퀴즈</h1>
+<p class="text-xs text-base-content/30 mt-1 uppercase tracking-widest">신화와 전설 &mdash; 인출 연습</p>
 </div>
-<div class="stats">
-<span>문제 <b id="qNum">0</b></span>
-<span>연속 <b id="streak">0</b></span>
-<span>숙달 <b id="mastery">0%</b></span>
+
+<!-- 스탯 -->
+<div class="flex justify-center gap-2">
+<div class="badge badge-ghost badge-sm gap-1 font-normal">문제 <span class="font-semibold text-warning" id="qNum">0</span></div>
+<div class="badge badge-ghost badge-sm gap-1 font-normal">연속 <span class="font-semibold text-warning" id="streak">0</span></div>
+<div class="badge badge-ghost badge-sm gap-1 font-normal">숙달 <span class="font-semibold text-warning" id="mastery">0%</span></div>
 </div>
-<div class="srs-info" id="srsInfo"></div>
-<div class="quiz-box">
-<div class="q-type" id="qType"></div>
-<div class="q-text" id="qText"></div>
-<div class="divider"></div>
-<div class="btn-row">
-<button class="btn btn-next" id="btnCorrect">&#10003;</button>
-<button class="btn btn-skip" id="btnWrong">&#10007;</button>
-<a class="btn btn-answer" id="btnShow" href="#" target="_blank">정답 확인</a>
-</div>
-</div>
-<div class="settings">
-<h2>퀴즈 유형</h2>
-<div class="chk-group">
-<label><input type="checkbox" checked data-type="champSynergy"><span>챔피언 → 시너지</span></label>
-<label><input type="checkbox" checked data-type="synergyChamp"><span>시너지 → 챔피언</span></label>
-<label><input type="checkbox" checked data-type="unlock"><span>해금 조건</span></label>
-<label><input type="checkbox" checked data-type="item"><span>아이템 조합</span></label>
-<label><input type="checkbox" checked data-type="synergyEffect"><span>시너지 효과</span></label>
-<label><input type="checkbox" checked data-type="radiantItem"><span>찬란한 아이템</span></label>
-<label><input type="checkbox" checked data-type="artifactItem"><span>유물 아이템</span></label>
-</div>
-<div class="settings-row">
-<span style="color:#3a3a50;font-size:.72rem">학습 데이터는 브라우저에 자동 저장됩니다</span>
-<button class="btn-sm" id="btnReset">초기화</button>
+
+<!-- SRS 정보 -->
+<div class="text-center text-[.7rem] text-base-content/25" id="srsInfo"></div>
+
+<!-- 퀴즈 카드 -->
+<div class="card bg-base-200 shadow-lg">
+<div class="card-body gap-4 p-6">
+<p class="text-[.65rem] font-semibold tracking-[.15em] uppercase text-warning/60" id="qType"></p>
+<p class="text-[1.05rem] leading-relaxed" id="qText"></p>
+<div class="divider my-0"></div>
+<div class="flex gap-2">
+<button class="btn btn-circle btn-sm btn-success btn-outline text-lg" id="btnCorrect">&#10003;</button>
+<button class="btn btn-circle btn-sm btn-error btn-outline text-lg" id="btnWrong">&#10007;</button>
+<a class="btn btn-sm btn-warning btn-outline flex-1 no-underline" id="btnShow" href="#" target="_blank">정답 확인</a>
 </div>
 </div>
+</div>
+
+<!-- 설정 -->
+<div class="collapse collapse-arrow bg-base-200 shadow-lg">
+<input type="checkbox" />
+<div class="collapse-title text-xs font-semibold tracking-wider uppercase text-base-content/40 min-h-0 py-3">퀴즈 유형</div>
+<div class="collapse-content">
+<div class="flex flex-wrap gap-1.5 pb-2">
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="champSynergy" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">챔피언 → 시너지</span></label>
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="synergyChamp" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">시너지 → 챔피언</span></label>
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="unlock" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">해금 조건</span></label>
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="item" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">아이템 조합</span></label>
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="synergyEffect" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">시너지 효과</span></label>
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="radiantItem" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">찬란한 아이템</span></label>
+<label class="label cursor-pointer gap-1.5 px-2.5 py-1.5 rounded-lg border border-base-content/5 hover:border-warning/30 transition-colors has-[:checked]:border-warning/40 has-[:checked]:bg-warning/5">
+<input type="checkbox" checked data-type="artifactItem" class="checkbox checkbox-warning checkbox-xs">
+<span class="label-text text-xs">유물 아이템</span></label>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-base-content/5">
+<span class="text-[.68rem] text-base-content/20">학습 데이터는 브라우저에 자동 저장됩니다</span>
+<button class="btn btn-ghost btn-xs text-base-content/30" id="btnReset">초기화</button>
+</div>
+</div>
+</div>
+
 </div>
 <script>
 // ===== 챔피언 데이터 =====
@@ -584,7 +546,7 @@ const allCards = buildAllCards();
 // 가중치 기반 카드 선택 (틀린 카드가 훨씬 자주 등장)
 function pickCard() {
   const types = [];
-  document.querySelectorAll('.chk-group input:checked').forEach(el => types.push(el.dataset.type));
+  document.querySelectorAll('.collapse-content input:checked').forEach(el => types.push(el.dataset.type));
   if (!types.length) types.push('champSynergy');
 
   const pool = allCards.filter(c => types.includes(c.type));
@@ -607,7 +569,7 @@ function pickCard() {
 // 숙달도 계산
 function getMastery() {
   const types = [];
-  document.querySelectorAll('.chk-group input:checked').forEach(el => types.push(el.dataset.type));
+  document.querySelectorAll('.collapse-content input:checked').forEach(el => types.push(el.dataset.type));
   if (!types.length) types.push('champSynergy');
   const pool = allCards.filter(c => types.includes(c.type));
   if (!pool.length) return 0;
@@ -631,7 +593,7 @@ function showSrsInfo(key) {
   const c = getCard(key);
   const boxNames = ['새카드','학습중','반복중','기억중','숙달중','완전숙달'];
   document.getElementById('srsInfo').innerHTML =
-    `<span class="box-tag box-${c.box}">${boxNames[c.box]}</span> `+
+    `<span class="inline-block px-2 py-0.5 rounded-full text-[.65rem] font-semibold box-${c.box}">${boxNames[c.box]}</span> `+
     `맞힘 ${c.correct}회 / 틀림 ${c.wrong}회`;
 }
 
@@ -658,7 +620,7 @@ document.getElementById('btnWrong').addEventListener('click', () => {
 });
 
 // 체크박스 변경 시 숙달도 갱신
-document.querySelectorAll('.chk-group input').forEach(el => {
+document.querySelectorAll('.collapse-content input').forEach(el => {
   el.addEventListener('change', updateStats);
 });
 
