@@ -24,10 +24,7 @@ h1{text-align:center;color:#c89b3c;font-size:1.6rem;margin-bottom:8px}
 .btn-next:hover{background:#3a6a3a}
 .btn-skip{background:#2a2a4a;color:#aaa}
 .btn-skip:hover{background:#3a3a5a}
-.answer-box{background:#0d0d20;border:1px solid #3a5a3a;border-radius:8px;padding:16px;margin-top:16px;display:none}
-.answer-box.show{display:block}
-.answer-box h3{color:#c89b3c;margin-bottom:8px;font-size:.95rem}
-.answer-box .answer-content{color:#8f8;font-size:1rem;line-height:1.6;white-space:pre-wrap}
+.divider{border-top:1px solid #2a2a4a;margin:20px 0 16px}
 .settings{background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:20px;margin-top:10px}
 .settings h2{color:#c89b3c;font-size:1rem;margin-bottom:12px}
 .chk-group{display:flex;flex-wrap:wrap;gap:8px}
@@ -44,8 +41,8 @@ h1{text-align:center;color:#c89b3c;font-size:1.6rem;margin-bottom:8px}
 .unlock-badge{color:#ff9800;font-size:.8rem;margin-left:4px}
 .srs-info{text-align:center;font-size:.75rem;color:#555;margin-bottom:12px}
 .srs-info .box-tag{display:inline-block;padding:1px 6px;border-radius:4px;margin-left:4px;font-size:.7rem}
-.wiki-link{display:inline-block;margin-top:8px;padding:10px 20px;background:#c89b3c;color:#0a0a1a;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .2s}
-.wiki-link:hover{background:#ddb04b;transform:translateY(-1px)}
+.btn-answer{background:#c89b3c;color:#0a0a1a;text-decoration:none;text-align:center}
+.btn-answer:hover{background:#ddb04b}
 .box-0{background:#ff4444;color:#fff}
 .box-1{background:#ff8800;color:#fff}
 .box-2{background:#ccaa00;color:#000}
@@ -70,13 +67,11 @@ h1{text-align:center;color:#c89b3c;font-size:1.6rem;margin-bottom:8px}
 <div class="quiz-box">
 <div class="q-type" id="qType"></div>
 <div class="q-text" id="qText"></div>
+<div class="divider"></div>
 <div class="btn-row">
 <button class="btn btn-next" id="btnCorrect">맞았다 ✓</button>
 <button class="btn btn-skip" id="btnWrong">틀렸다 ✗</button>
-<button class="btn btn-answer" id="btnShow">정답 확인하기</button>
-</div>
-<div class="answer-box" id="answerBox">
-<div class="answer-content" id="answerContent"></div>
+<a class="btn btn-answer" id="btnShow" href="#" target="_blank">정답 확인하기</a>
 </div>
 </div>
 <div class="settings">
@@ -612,15 +607,10 @@ function showQuestion() {
   const q = picked.gen();
   document.getElementById('qType').textContent = q.qType;
   document.getElementById('qText').innerHTML = q.qText;
-  document.getElementById('answerContent').innerHTML = `<a href="${q.wikiUrl}" target="_blank" class="wiki-link">나무위키에서 확인 →</a>`;
-  document.getElementById('answerBox').classList.remove('show');
+  document.getElementById('btnShow').href = q.wikiUrl;
   showSrsInfo(currentCardKey);
   updateStats();
 }
-
-document.getElementById('btnShow').addEventListener('click', () => {
-  document.getElementById('answerBox').classList.add('show');
-});
 
 document.getElementById('btnCorrect').addEventListener('click', () => {
   cardCorrect(currentCardKey);
