@@ -16,10 +16,6 @@ h1{text-align:center;color:#c89b3c;font-size:1.6rem;margin-bottom:8px}
 .q-type{color:#785a28;font-size:.8rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
 .q-text{font-size:1.2rem;color:#fff;margin-bottom:16px;line-height:1.5}
 .q-text .highlight{color:#c89b3c;font-weight:bold}
-.input-area{margin-bottom:16px}
-.input-area textarea{width:100%;background:#0d0d20;border:1px solid #3a3a5a;border-radius:8px;color:#e0e0e0;padding:12px;font-size:1rem;resize:vertical;min-height:80px;font-family:inherit}
-.input-area textarea:focus{outline:none;border-color:#c89b3c}
-.input-area textarea::placeholder{color:#555}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap}
 .btn{padding:10px 20px;border:none;border-radius:8px;font-size:.95rem;cursor:pointer;font-weight:600;transition:all .2s}
 .btn-answer{background:#c89b3c;color:#0a0a1a}
@@ -74,16 +70,12 @@ h1{text-align:center;color:#c89b3c;font-size:1.6rem;margin-bottom:8px}
 <div class="quiz-box">
 <div class="q-type" id="qType"></div>
 <div class="q-text" id="qText"></div>
-<div class="input-area">
-<textarea id="userInput" placeholder="정답을 입력하세요..."></textarea>
-</div>
 <div class="btn-row">
-<button class="btn btn-answer" id="btnShow">정답 보기</button>
-<button class="btn btn-next" id="btnCorrect" style="display:none">맞았다 ✓</button>
-<button class="btn btn-skip" id="btnWrong" style="display:none">틀렸다 ✗</button>
+<button class="btn btn-next" id="btnCorrect">맞았다 ✓</button>
+<button class="btn btn-skip" id="btnWrong">틀렸다 ✗</button>
+<button class="btn btn-answer" id="btnShow">정답 확인하기</button>
 </div>
 <div class="answer-box" id="answerBox">
-<h3>정답</h3>
 <div class="answer-content" id="answerContent"></div>
 </div>
 </div>
@@ -262,6 +254,9 @@ const SYNERGY_WIKI={"공허":"3.1.1","그림자 군도":"3.1.2","녹서스":"3.1
 const radiantItems=["찬란한 죽음의 검","찬란한 밤의 끝자락","찬란한 스테락의 도전","찬란한 마법공학 총검","찬란한 거인 학살자","찬란한 쇼진의 창","찬란한 피바라기","찬란한 무한의 대검","찬란한 덤불 조끼","찬란한 태양불꽃 망토","찬란한 크라운가드","찬란한 거인의 결의","찬란한 수호자의 맹세","찬란한 가고일 돌갑옷","찬란한 굳건한 심장","찬란한 워모그의 갑옷","찬란한 모렐로노미콘","찬란한 내셔의 이빨","찬란한 정령의 형상","찬란한 저녁갑주","찬란한 타격대의 철퇴","찬란한 라바돈의 죽음모자","찬란한 구인수의 격노검","찬란한 대천사의 지팡이","찬란한 이온 충격기","찬란한 보석 건틀릿","찬란한 붉은 덩굴정령","찬란한 공허의 지팡이","찬란한 크라켄의 분노","찬란한 최후의 속삭임","찬란한 푸른 파수꾼","찬란한 적응형 투구","찬란한 정의의 손길","찬란한 용의 발톱","찬란한 수은","찬란한 도적의 장갑"];
 const artifactItems=["거대한 히드라","거물의 갑옷","고속 연사포","공허 건틀릿","도박꾼의 칼날","라이트실드 문장","루덴의 폭풍","리치베인","마법사의 최후","명멸검","무한한 삼위일체","방한 장갑","불굴","새벽심장","새벽의 방패","생선대가리","선체분쇄자","스태틱의 단검","승천의 부적","역병의 보석","영원한 겨울","영원한 서약","은빛 여명","자객의 발톱","저격수의 집중","존야의 역설","죽음의 저항","지옥불 손도끼","지평선의 초점","추적자의 팔목 보호대","카파 주스","황금 징수의 총","황혼의 방패","대장장이의 장갑","증강: 강철로부터 풀려난 봉인"];
 const ITEM_WIKI={"죽음의 검":"3.2.1","밤의 끝자락":"3.2.2","스테락의 도전":"3.2.3","마법공학 총검":"3.2.4","거인 학살자":"3.2.5","쇼진의 창":"3.2.6","피바라기":"3.2.7","무한의 대검":"3.2.8","덤불 조끼":"3.2.9","태양불꽃 망토":"3.2.10","크라운가드":"3.2.11","거인의 결의":"3.2.12","수호자의 맹세":"3.2.13","가고일 돌갑옷":"3.2.14","굳건한 심장":"3.2.15","워모그의 갑옷":"3.2.16","모렐로노미콘":"3.2.17","내셔의 이빨":"3.2.18","정령의 형상":"3.2.19","저녁갑주":"3.2.20","타격대의 철퇴":"3.2.21","라바돈의 죽음모자":"3.2.22","구인수의 격노검":"3.2.23","대천사의 지팡이":"3.2.24","이온 충격기":"3.2.25","보석 건틀릿":"3.2.26","붉은 덩굴정령":"3.2.27","공허의 지팡이":"3.2.28","크라켄의 분노":"3.2.29","최후의 속삭임":"3.2.30","푸른 파수꾼":"3.2.31","적응형 투구":"3.2.32","정의의 손길":"3.2.33","용의 발톱":"3.2.34","수은":"3.2.35","도적의 장갑":"3.2.36"};
+const RADIANT_WIKI={"찬란한 죽음의 검":"3.6.1","찬란한 밤의 끝자락":"3.6.2","찬란한 스테락의 도전":"3.6.3","찬란한 마법공학 총검":"3.6.4","찬란한 거인 학살자":"3.6.5","찬란한 쇼진의 창":"3.6.6","찬란한 피바라기":"3.6.7","찬란한 무한의 대검":"3.6.8","찬란한 덤불 조끼":"3.6.9","찬란한 태양불꽃 망토":"3.6.10","찬란한 크라운가드":"3.6.11","찬란한 거인의 결의":"3.6.12","찬란한 수호자의 맹세":"3.6.13","찬란한 가고일 돌갑옷":"3.6.14","찬란한 굳건한 심장":"3.6.15","찬란한 워모그의 갑옷":"3.6.16","찬란한 모렐로노미콘":"3.6.17","찬란한 내셔의 이빨":"3.6.18","찬란한 정령의 형상":"3.6.19","찬란한 저녁갑주":"3.6.20","찬란한 타격대의 철퇴":"3.6.21","찬란한 라바돈의 죽음모자":"3.6.22","찬란한 구인수의 격노검":"3.6.23","찬란한 대천사의 지팡이":"3.6.24","찬란한 이온 충격기":"3.6.25","찬란한 보석 건틀릿":"3.6.26","찬란한 붉은 덩굴정령":"3.6.27","찬란한 공허의 지팡이":"3.6.28","찬란한 크라켄의 분노":"3.6.29","찬란한 최후의 속삭임":"3.6.30","찬란한 푸른 파수꾼":"3.6.31","찬란한 적응형 투구":"3.6.32","찬란한 정의의 손길":"3.6.33","찬란한 용의 발톱":"3.6.34","찬란한 수은":"3.6.35","찬란한 도적의 장갑":"3.6.36"};
+const ARTIFACT_WIKI={"거대한 히드라":"3.5.1","거물의 갑옷":"3.5.2","고속 연사포":"3.5.3","공허 건틀릿":"3.5.4","도박꾼의 칼날":"3.5.5","라이트실드 문장":"3.5.6","루덴의 폭풍":"3.5.7","리치베인":"3.5.8","마법사의 최후":"3.5.9","명멸검":"3.5.10","무한한 삼위일체":"3.5.11","방한 장갑":"3.5.12","불굴":"3.5.13","새벽심장":"3.5.14","새벽의 방패":"3.5.15","생선대가리":"3.5.16","선체분쇄자":"3.5.17","스태틱의 단검":"3.5.18","승천의 부적":"3.5.19","역병의 보석":"3.5.20","영원한 겨울":"3.5.21","영원한 서약":"3.5.22","은빛 여명":"3.5.23","자객의 발톱":"3.5.24","저격수의 집중":"3.5.25","존야의 역설":"3.5.26","죽음의 저항":"3.5.27","지옥불 손도끼":"3.5.28","지평선의 초점":"3.5.29","추적자의 팔목 보호대":"3.5.30","카파 주스":"3.5.31","황금 징수의 총":"3.5.32","황혼의 방패":"3.5.33","대장장이의 장갑":"3.5.34","증강: 강철로부터 풀려난 봉인":"3.5.35"};
+const CHAMP_WIKI={"럼블":"2.1.1","룰루":"2.1.2","브라이어":"2.1.3","블리츠크랭크":"2.1.4","비에고":"2.1.5","소나":"2.1.6","쉔":"2.1.7","애니비아":"2.1.8","일라오이":"2.1.9","자르반 4세":"2.1.10","진":"2.1.11","케이틀린":"2.1.12","코그모":"2.1.13","키아나":"2.1.14","니코":"2.2.1","렉사이":"2.2.2","바이":"2.2.3","사이온":"2.2.4","신 짜오":"2.2.5","아펠리오스":"2.2.6","애쉬":"2.2.7","야스오":"2.2.8","에코":"2.2.9","초가스":"2.2.10","트리스타나":"2.2.11","트위스티드 페이트":"2.2.12","티모":"2.2.13","갱플랭크":"2.3.1","노틸러스":"2.3.2","드레이븐":"2.3.3","레오나":"2.3.4","로리스":"2.3.5","말자하":"2.3.6","문도 박사":"2.3.7","밀리오":"2.3.8","베인":"2.3.9","세주아니":"2.3.10","아리":"2.3.11","조이":"2.3.12","징크스":"2.3.13","가렌":"2.4.1","럭스":"2.4.2","리산드라":"2.4.3","미스 포츈":"2.4.4","벨베스":"2.4.5","브라움":"2.4.6","세라핀":"2.4.7","스웨인":"2.4.8","암베사":"2.4.9","오공":"2.4.10","유나라":"2.4.11","타릭":"2.4.12","루시안과 세나":"2.5.1","쉬바나":"2.5.2","아지르":"2.5.3","애니":"2.5.4","오른":"2.5.5","질리언":"2.5.6","킨드레드":"2.5.7","피들스틱":"2.5.8","그레이브즈":"3.1.1","바드":"3.1.2","뽀삐":"3.1.3","오리아나":"3.1.4","요릭":"3.1.5","트린다미어":"3.1.6","그웬":"3.2.1","다리우스":"3.2.2","르블랑":"3.2.3","케넨":"3.2.4","코부코와 유미":"3.2.5","나서스":"3.3.1","니달리":"3.3.2","다이애나":"3.3.3","레넥톤":"3.3.4","베이가":"3.3.5","스카너":"3.3.6","신지드":"3.3.7","요네":"3.3.8","워윅":"3.3.9","카이사":"3.3.10","칼리스타":"3.3.11","피즈":"3.3.12","전령":"3.3.13","T-헥스":"3.4.1","갈리오":"3.4.2","멜":"3.4.3","볼리베어":"3.4.4","세트":"3.4.5","쓰레쉬":"3.4.6","아트록스":"3.4.7","제라스":"3.4.8","직스":"3.4.9","탐 켄치":"3.4.10","내셔 남작":"3.5.1","라이즈":"3.5.2","브록":"3.5.3","사일러스":"3.5.4","아우렐리온 솔":"3.5.5","자헨":"3.5.6"};
 
 // ===== 시너지 효과 데이터 =====
 const synergyEffects = {
@@ -492,11 +487,12 @@ function cardWrong(key) {
 function buildAllCards() {
   const all = [];
   champions.forEach(c => {
+    const sec = CHAMP_WIKI[c.name];
     all.push({ key:`cs:${c.name}`, type:'champSynergy', gen: () => {
       const costClass = `cost-${c.cost}`;
       return { qType:"챔피언 → 시너지",
         qText:`<span class="highlight">${c.name}</span> <span class="cost-badge ${costClass}">${c.cost}코스트</span>의 시너지를 모두 적으세요.`,
-        wikiUrl:`${NAMU_UNIT}` };
+        wikiUrl: sec ? `${NAMU_UNIT}#s-${sec}` : NAMU_UNIT };
     }});
   });
   Object.keys(synergyMap).forEach(trait => {
@@ -510,11 +506,12 @@ function buildAllCards() {
     })});
   });
   unlockChamps.forEach(c => {
+    const sec = CHAMP_WIKI[c.name];
     all.push({ key:`ul:${c.name}`, type:'unlock', gen: () => {
       const costClass = `cost-${c.cost}`;
       return { qType:"해금 조건",
         qText:`<span class="highlight">${c.name}</span> <span class="cost-badge ${costClass}">${c.cost}코스트</span>의 해금 조건은?`,
-        wikiUrl:`${NAMU_UNIT}` };
+        wikiUrl: sec ? `${NAMU_UNIT}#s-${sec}` : NAMU_UNIT };
     }});
   });
   items.forEach(item => {
@@ -533,18 +530,20 @@ function buildAllCards() {
       wikiUrl: sec ? `${NAMU_SET}#s-${sec}` : NAMU_SET
     })});
   });
-  radiantItems.forEach((name, i) => {
+  radiantItems.forEach(name => {
+    const sec = RADIANT_WIKI[name];
     all.push({ key:`ri:${name}`, type:'radiantItem', gen: () => ({
       qType:"찬란한 아이템",
       qText:`<span class="highlight">${name}</span>의 효과를 적으세요.`,
-      wikiUrl:`${NAMU_ITEM}#s-3.6.${i+1}`
+      wikiUrl: sec ? `${NAMU_ITEM}#s-${sec}` : NAMU_ITEM
     })});
   });
-  artifactItems.forEach((name, i) => {
+  artifactItems.forEach(name => {
+    const sec = ARTIFACT_WIKI[name];
     all.push({ key:`ai:${name}`, type:'artifactItem', gen: () => ({
       qType:"유물 아이템",
       qText:`<span class="highlight">${name}</span>의 효과를 적으세요.`,
-      wikiUrl:`${NAMU_ITEM}#s-3.5.${i+1}`
+      wikiUrl: sec ? `${NAMU_ITEM}#s-${sec}` : NAMU_ITEM
     })});
   });
   return all;
@@ -591,7 +590,6 @@ function getMastery() {
 
 // ===== UI 로직 =====
 let currentCardKey = null;
-let answerShown = false;
 
 function updateStats() {
   document.getElementById('qNum').textContent = srsData.stats.qCount;
@@ -614,24 +612,14 @@ function showQuestion() {
   const q = picked.gen();
   document.getElementById('qType').textContent = q.qType;
   document.getElementById('qText').innerHTML = q.qText;
-  document.getElementById('answerContent').innerHTML = `<a href="${q.wikiUrl}" target="_blank" class="wiki-link">정답 확인하기 →</a>`;
+  document.getElementById('answerContent').innerHTML = `<a href="${q.wikiUrl}" target="_blank" class="wiki-link">나무위키에서 확인 →</a>`;
   document.getElementById('answerBox').classList.remove('show');
-  document.getElementById('userInput').value = '';
-  document.getElementById('btnShow').style.display = '';
-  document.getElementById('btnCorrect').style.display = 'none';
-  document.getElementById('btnWrong').style.display = 'none';
-  document.getElementById('userInput').focus();
-  answerShown = false;
   showSrsInfo(currentCardKey);
   updateStats();
 }
 
 document.getElementById('btnShow').addEventListener('click', () => {
   document.getElementById('answerBox').classList.add('show');
-  document.getElementById('btnShow').style.display = 'none';
-  document.getElementById('btnCorrect').style.display = '';
-  document.getElementById('btnWrong').style.display = '';
-  answerShown = true;
 });
 
 document.getElementById('btnCorrect').addEventListener('click', () => {
@@ -642,13 +630,6 @@ document.getElementById('btnCorrect').addEventListener('click', () => {
 document.getElementById('btnWrong').addEventListener('click', () => {
   cardWrong(currentCardKey);
   showQuestion();
-});
-
-// Ctrl+Enter로 정답 보기
-document.getElementById('userInput').addEventListener('keydown', (e) => {
-  if(e.key === 'Enter' && e.ctrlKey) {
-    if(!answerShown) document.getElementById('btnShow').click();
-  }
 });
 
 // 체크박스 변경 시 숙달도 갱신
