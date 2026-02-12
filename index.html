@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dim">
+<html lang="ko" data-theme="night">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,10 +44,14 @@
 <p class="text-[.65rem] font-semibold tracking-[.15em] uppercase text-warning/60" id="qType"></p>
 <p class="text-[1.05rem] leading-relaxed" id="qText"></p>
 <div class="divider my-0"></div>
-<div class="flex gap-2">
-<button class="btn btn-circle btn-sm btn-success btn-outline text-lg" id="btnCorrect">&#10003;</button>
-<button class="btn btn-circle btn-sm btn-error btn-outline text-lg" id="btnWrong">&#10007;</button>
-<a class="btn btn-sm btn-warning btn-outline flex-1 no-underline" id="btnShow" href="#" target="_blank">정답 확인</a>
+<div class="flex gap-3 items-center">
+<button class="btn btn-circle btn-md btn-success btn-outline" id="btnCorrect">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="10" stroke-width="2"/><path d="m8 12 3 3 5-5"/></svg>
+</button>
+<button class="btn btn-circle btn-md btn-error btn-outline" id="btnWrong">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="10" stroke-width="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+</button>
+<a class="btn btn-md btn-warning flex-1 no-underline" id="btnShow" href="#" target="_blank">정답 확인</a>
 </div>
 </div>
 </div>
