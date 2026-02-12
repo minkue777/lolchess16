@@ -36,7 +36,9 @@ body{background:#080810;color:#c8c8d4;font-family:'Inter','Segoe UI',sans-serif;
 
 /* 버튼 영역 */
 .btn-row{display:flex;gap:8px}
-.btn{flex:1;padding:12px 0;border:none;border-radius:10px;font-size:.85rem;cursor:pointer;font-weight:600;transition:all .15s ease;letter-spacing:-.01em}
+.btn{padding:12px 0;border:none;border-radius:10px;font-size:.85rem;cursor:pointer;font-weight:600;transition:all .15s ease;letter-spacing:-.01em}
+.btn-next,.btn-skip{width:52px;flex-shrink:0;font-size:1.2rem}
+.btn-answer{flex:1}
 .btn:active{transform:scale(.97)}
 .btn-next{background:rgba(60,180,100,.12);color:#5ec97a;border:1px solid rgba(60,180,100,.2)}
 .btn-next:hover{background:rgba(60,180,100,.2);border-color:rgba(60,180,100,.35)}
@@ -102,8 +104,8 @@ body{background:#080810;color:#c8c8d4;font-family:'Inter','Segoe UI',sans-serif;
 <div class="q-text" id="qText"></div>
 <div class="divider"></div>
 <div class="btn-row">
-<button class="btn btn-next" id="btnCorrect">맞았다</button>
-<button class="btn btn-skip" id="btnWrong">틀렸다</button>
+<button class="btn btn-next" id="btnCorrect">&#10003;</button>
+<button class="btn btn-skip" id="btnWrong">&#10007;</button>
 <a class="btn btn-answer" id="btnShow" href="#" target="_blank">정답 확인</a>
 </div>
 </div>
